@@ -113,6 +113,10 @@ jobs:
           echo "{path}={$path}" >> $GITHUB_OUTPUT
           echo "{name}={$(basename $path)}" >> $GITHUB_OUTPUT
           
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+          
       - name: Create Release Asset
         id: create_release
         uses: actions/create-release@v1
