@@ -110,12 +110,11 @@ jobs:
           ./scripts/install_deps.sh
           ./scripts/build.sh
           path=$(find ./output -name "*.7z"|head -n 1)
-          echo "##[set-output name=path;]$path"
-          echo "##[set-output name=name;]$(basename $path)"
-          
+          echo "{path}={$path}" >> $GITHUB_OUTPUT
+          echo "{name}={$(basename $path)}" >> $GITHUB_OUTPUT
       - id: vars
         run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short "$GITHUB_SHA")"
+          echo "{sha_short}={$(git rev-parse --short "$GITHUB_SHA")}" >> $GITHUB_OUTPUT
       
       - uses: mukunku/tag-exists-action@v1.0.0
         id: checkTag
