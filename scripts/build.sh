@@ -830,6 +830,7 @@ else
     rm -rf "${OUTPUT_PATH:?}" || abort
     cp -r "$WORK_DIR"/wsa/"$ARCH" "$OUTPUT_PATH" || abort
 fi
+echo "${OUTPUT_PATH:?}"
 echo -e "done\n"
 
 echo "Cleanup Work Directory"
