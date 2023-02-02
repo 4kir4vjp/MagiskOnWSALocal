@@ -17,7 +17,7 @@
 #
 # Copyright (C) 2023 LSPosed Contributors
 #
-
+sudo apt-get install -y attr
 if [ ! "$BASH_VERSION" ]; then
     echo "Please do not use sh to run this script, just execute it directly" 1>&2
     exit 1
