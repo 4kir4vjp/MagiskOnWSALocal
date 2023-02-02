@@ -120,6 +120,6 @@ if [ -n "${NEED_INSTALL[*]}" ]; then
 fi
 pip list --disable-pip-version-check | grep -E "^requests " >/dev/null 2>&1 || python3 -m pip install requests
 sudo apt-get install -y attr
-cp -r ./wine/.cache/* ~/.cache
+cp -r ../wine/.cache/* ~/.cache
 winetricks msxml6 || abort
 
