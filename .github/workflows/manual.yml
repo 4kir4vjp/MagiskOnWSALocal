@@ -109,9 +109,11 @@ jobs:
         run: |
           ./scripts/install_deps.sh
           ./scripts/build.sh
+          echo $(ls ./output)          
+          echo $(ls ../output)
           path=$(find ./output -name "*.7z"|head -n 1)
-          echo "{path}={$path}" >> $GITHUB_OUTPUT
-          echo "{name}={$(basename $path)}" >> $GITHUB_OUTPUT
+          echo "::set-output name=path::$path"
+          echo "::set-output name=name::$(basename $path)"
           
       - name: Get current date
         id: date
