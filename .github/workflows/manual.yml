@@ -107,6 +107,7 @@ jobs:
           REMOVE_AMAZON: ${{ github.event.inputs.remove_amazon }}
           ROOT_SOL: ${{ github.event.inputs.root_sol }}
         run: |
+          ./scripts/install_deps.sh
           ./scripts/build.sh
           path=$(find ./output -name "*.7z"|head -n 1)
           echo "##[set-output name=path;]$path"
