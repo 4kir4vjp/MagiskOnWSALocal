@@ -113,9 +113,9 @@ jobs:
           echo "{path}={$path}" >> $GITHUB_OUTPUT
           echo "{name}={$(basename $path)}" >> $GITHUB_OUTPUT
           
-      - id: create_release
+      - name: Create Release Asset
+        id: create_release
         uses: actions/create-release@v1
-        if: ${{ steps.checkTag.outputs.exists == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -123,13 +123,14 @@ jobs:
           release_name: MagiskOnWSA ${{ github.ref }}
           draft: false
           prerelease: false          
+          
       - name: Upload Release Asset
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ github.event.release.upload_url }}
           asset_path: ${{ steps.run.outputs.path }}
           asset_name: ${{ steps.run.outputs.name }}
           asset_content_type: application/x-7z-compressed
