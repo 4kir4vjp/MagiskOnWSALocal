@@ -17,7 +17,6 @@
 #
 # Copyright (C) 2023 LSPosed Contributors
 #
-sudo apt-get install -y attr
 if [ ! "$BASH_VERSION" ]; then
     echo "Please do not use sh to run this script, just execute it directly" 1>&2
     exit 1
@@ -120,10 +119,7 @@ if [ -n "${NEED_INSTALL[*]}" ]; then
     fi
 fi
 pip list --disable-pip-version-check | grep -E "^requests " >/dev/null 2>&1 || python3 -m pip install requests
+sudo apt-get install -y attr
+cp -r ../wine/.cache/* ~/.cache
+winetricks msxml6 || abort
 
-if [ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ] && which wine64 > /dev/null; then
-    winetricks list-installed | grep -E "^msxml6" >/dev/null 2>&1 || {
-        cp -r ../wine/.cache/* ~/.cache
-        winetricks msxml6 || abort
-    }
-fi
