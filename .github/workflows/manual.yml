@@ -113,13 +113,12 @@ jobs:
           ./scripts/install_deps.sh
           ./scripts/build.sh
           path=$(find ./output -name "*.7z"|head -n 1)
-          echo $path
           echo "::set-output name=path::$path"
           echo "::set-output name=name::$(basename $path)"
           
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Set vars
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short "$GITHUB_SHA")"
           
       - name: Create Release Asset
         id: create_release
@@ -127,8 +126,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.date.outputs.date }}
-          release_name: MagiskOnWSA ${{ steps.date.outputs.date }}
+          tag_name: ${{ steps.vars.outputs.sha_short }}
+          release_name: MagiskOnWSA ${{ steps.vars.outputs.sha_short }}
           draft: false
           prerelease: false          
           
