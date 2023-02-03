@@ -98,7 +98,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - id: run
+      - name: Run build
+        id: run
         env:
           ARCH: ${{ matrix.arch }}
           RELEASE_TYPE: ${{ github.event.inputs.release_type }}
@@ -109,9 +110,8 @@ jobs:
         run: |
           ./scripts/install_deps.sh
           ./scripts/build.sh
-          echo $(ls ./output)          
-          echo $(ls ../output)
           path=$(find ./output -name "*.7z"|head -n 1)
+          echo $path
           echo "::set-output name=path::$path"
           echo "::set-output name=name::$(basename $path)"
           
