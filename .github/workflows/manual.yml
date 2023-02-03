@@ -107,6 +107,8 @@ jobs:
           GAPPS_VARIANT: ${{ github.event.inputs.gapps_variant }}
           REMOVE_AMAZON: ${{ github.event.inputs.remove_amazon }}
           ROOT_SOL: ${{ github.event.inputs.root_sol }}
+          COMPRESS_OUTPUT: "--compress"
+          COMPRESS_FORMAT: "7z"
         run: |
           ./scripts/install_deps.sh
           ./scripts/build.sh
