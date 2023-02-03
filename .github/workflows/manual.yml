@@ -140,6 +140,10 @@ jobs:
         with:
           tag: ${{ steps.vars.outputs.sha_short }}
           token: ${{ github.token }}
+      - id: test        
+        run: |
+          echo "ls ./output"
+          echo "ls ../output"
           
       - name: Upload Release Asset
         id: upload-release-asset 
